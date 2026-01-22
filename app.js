@@ -1,33 +1,18 @@
 const API = "https://long-forest-6d6b.kailcongvinh.workers.dev";
-let conversationId = localStorage.getItem("cid");
 
-function add(role, text) {
-  const chat = document.getElementById("chat");
-  const div = document.createElement("div");
-  div.className = role;
-  div.textContent = text;
-  chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
+// Tạo sessionId 1 lần
+let sessionId = localStorage.getItem("sid");
+if (!sessionId) {
+  sessionId = crypto.randomUUID();
+  localStorage.setItem("sid", sessionId);
 }
 
-async function send() {
-  const input = document.getElementById("prompt");
-  const text = input.value.trim();
-  if (!text) return;
-
-  add("user", text);
-  input.value = "";
-
-  let url = `${API}?q=${encodeURIComponent(text)}`;
-  if (conversationId) url += `&cid=${encodeURIComponent(conversationId)}`;
+async function send(text) {
+  const url =
+    `${API}?q=${encodeURIComponent(text)}&sid=${sessionId}`;
 
   const res = await fetch(url);
-  const data = await res.json();
+  const aiText = await res.text();
 
-  add("ai", data.text);
-
-  if (data.conversationId) {
-    conversationId = data.conversationId;
-    localStorage.setItem("cid", conversationId);
-  }
+  add("ai", aiText);
 }
