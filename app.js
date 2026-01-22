@@ -31,4 +31,3 @@ async function send() {
     localStorage.setItem("cid", conversationId);
   }
 }
-
