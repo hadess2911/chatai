@@ -1,4 +1,4 @@
-const API = "/api/chat";
+const API = "https://long-forest-6d6b.kailcongvinh.workers.dev";
 let conversationId = localStorage.getItem("cid");
 
 function add(role, text) {
@@ -31,3 +31,4 @@ async function send() {
     localStorage.setItem("cid", conversationId);
   }
 }
+
