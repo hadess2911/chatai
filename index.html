@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Chat</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="header">
+  <span>AI Chat</span>
+  <button onclick="newChat()">New chat</button>
+</div>
+
 <div id="chat"></div>
 
 <div id="input">
-  <input id="prompt" placeholder="Nhập câu hỏi..." />
+  <input id="prompt" placeholder="Nhập tin nhắn..." onkeydown="if(event.key==='Enter') send()" />
   <button onclick="send()">Gửi</button>
 </div>
 
